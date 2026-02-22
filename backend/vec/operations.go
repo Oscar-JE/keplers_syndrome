@@ -4,7 +4,6 @@ func Dim(v Vec) int {
 	return len(v.values)
 }
 
-// kommer behövas för att flytta punkterna ett tidsteg Frammåt
 func ScalarMultiplication(scalar float64, v Vec) Vec {
 	var rV Vec = Zero(Dim(v))
 	for i := range v.values {
@@ -31,9 +30,11 @@ func Add(v1 Vec, v2 Vec) Vec {
 	return res
 }
 
-func Mirror(vector Vec, planeNormal Vec) {
-	//här behöver vi kunna köra vektor addition
-	// behöver också vector produckt
+func Mirror(vector Vec, planeNormal Vec) Vec {
+	// hör får vi kontrollra tecken
+	// görs med ett enkelt experiment
+	nScaling := DotProduct(vector, planeNormal) / DotProduct(planeNormal, planeNormal)
+	return Add(vector, ScalarMultiplication(nScaling, planeNormal))
 }
 
 func demandEqualDimensions(v1 Vec, v2 Vec, method string) {

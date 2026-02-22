@@ -21,6 +21,17 @@ func Init(values []float64) Vec {
 	return Vec{values: values}
 }
 
+func Eq(a Vec, b Vec) bool {
+	if len(a.values) != len(b.values) {
+		return false
+	}
+	var eq bool = true
+	for i := range a.values {
+		eq = eq && a.values[i] == b.values[i]
+	}
+	return eq
+}
+
 func (v Vec) String() string {
 	var rep string = "("
 	if len(v.values) > 0 {

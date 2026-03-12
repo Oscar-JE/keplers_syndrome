@@ -33,7 +33,7 @@ func Add(v1 Vec, v2 Vec) Vec {
 func Mirror(vector Vec, planeNormal Vec) Vec {
 	// hör får vi kontrollra tecken
 	// görs med ett enkelt experiment
-	nScaling := DotProduct(vector, planeNormal) / DotProduct(planeNormal, planeNormal)
+	nScaling := -2 * DotProduct(vector, planeNormal) / DotProduct(planeNormal, planeNormal)
 	return Add(vector, ScalarMultiplication(nScaling, planeNormal))
 }
 

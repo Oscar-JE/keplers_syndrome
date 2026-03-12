@@ -41,3 +41,23 @@ func TestDotProduct0(t *testing.T) {
 		t.Errorf("Dot product of parallel is the lengths multiplied")
 	}
 }
+
+func TestMirrorYplane(t *testing.T) {
+	normalToTheRight := Init([]float64{1, 0})
+	normalToTheLeft := Init([]float64{-1, 0})
+	toTheRight := Init([]float64{1, 0})
+	m1 := Mirror(toTheRight, normalToTheRight)
+	m2 := Mirror(toTheRight, normalToTheLeft)
+	if !Eq(m1, m2) || !Eq(m1, Init([]float64{-1, 0})) {
+		t.Errorf("mirror in y plane in 2d case does not behave as expected for pure x traversal")
+	}
+}
+
+func TestMirrorinDiagonalPlane(t *testing.T) {
+	nomrmal := Init([]float64{-1, 1})
+	toTheRight := Init([]float64{1, 0})
+	r := Mirror(toTheRight, nomrmal)
+	if !Eq(r, Init([]float64{0, 1})) {
+		t.Errorf("diagonal mirror not working")
+	}
+}

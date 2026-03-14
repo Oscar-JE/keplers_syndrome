@@ -30,9 +30,12 @@ func Add(v1 Vec, v2 Vec) Vec {
 	return res
 }
 
+func Subtract(v1 Vec, v2 Vec) Vec {
+	demandEqualDimensions(v1,v2, "Vector Subtraction")
+	return Add(v1 , ScalarMultiplication(-1,v2))
+}
+
 func Mirror(vector Vec, planeNormal Vec) Vec {
-	// hör får vi kontrollra tecken
-	// görs med ett enkelt experiment
 	nScaling := -2 * DotProduct(vector, planeNormal) / DotProduct(planeNormal, planeNormal)
 	return Add(vector, ScalarMultiplication(nScaling, planeNormal))
 }

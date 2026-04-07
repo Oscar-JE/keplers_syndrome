@@ -9,21 +9,35 @@ type kinematic struct {
 
 type Particle struct {
 	movement kinematic
-	mass float64
-	radia float64
+	mass     float64
+	radia    float64
 }
 
-func dualCollision(p1 Particle, p2 Particle, timeStep float64) (Particle , Particle) {
-	// börjar med att kolla om de kolliderar
-	// hitta den nädmaste punkten och kolla om det är mer eller mindre än
-	// den kombinerade radien av de båda partiklarna
-	// kan jag göra det så enkel??
-	// får jag tekniska problem om de korsar varandra i tidsspannet?
+type kollisionDetailjs struct {
+	velocity vec.Vec
+	mass     float64
+}
 
-	// om man kollar på vektorn mellan de två vektorerna så kan man använda intervall halvering
-	// för att hitta punkten som de är närmast varandra,
-	// notera att vektorn mellan dem roterar samtidigt som partiklarna rör sig mot eller ifrån varandra
-	//
+func kollisionDetailjsFromParticle(p Particle) kollisionDetailjs {
+	return kollisionDetailjs{velocity: p.movement.velocity, mass: p.mass}
+}
 
-	//
+func timeToCollision(pos1 vec.Vec, v1 vec.Vec, pos2 vec.Vec, v2 vec.Vec, distance float64) float64 {
+	deltaPos := vec.Subtract(pos2, pos1)
+	deltaV := vec.Subtract(v2, v1)
+	if vec.DotProduct(deltaPos, deltaPos) < distance*distance {
+		return 0
+	}
+	closestPoint := closestPoint(deltaPos, deltaV)
+
+	return vec.DotProduct(closestPoint, closestPoint) // vet att detta är fel
+}
+
+func closestPoint(deltaPos vec.Vec, deltaV vec.Vec) vec.Vec {
+	fromClosestPoint := vec.ScalarMultiplication(vec.DotProduct(deltaV, deltaPos)/vec.DotProduct(deltaV, deltaV), deltaV)
+	return vec.Subtract(deltaPos, fromClosestPoint)
+}
+
+func dualCollision(p1 Particle, p2 Particle, timeStep float64) (Particle, Particle) {
+	return Particle{}, Particle{}
 }

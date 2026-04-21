@@ -34,9 +34,16 @@ func timeToCollision(pos1 vec.Vec, v1 vec.Vec, pos2 vec.Vec, v2 vec.Vec, distanc
 
 	if vec.DotProduct(closestPoint, closestPoint) > distance*distance { // det blir ingen kollision
 		return false, -1
-	} else {
-
 	}
+	// det blir en kollision.
+	// Då ska vi fråga oss när
+	// vi vet att avståndet är "distance" vid krock
+	//vet också att vi bildar en rätsidig triangel vid den närmaste punkten
+	// Då kan vi räkna ut längden vi färdats till krock
+	// längden från start till krock blir då känd
+	// finns det något snabbare sätt att göra detta på? Antagligen men vi måste komma någonstans
+	// Dags att implementera detta-
+	startToClosest :=   
 
 	return true, vec.DotProduct(closestPoint, closestPoint)
 }

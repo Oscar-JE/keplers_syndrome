@@ -13,14 +13,21 @@ type Particle struct {
 	radia    float64
 }
 
+func InitParticle(position vec.Vec, velocity vec.Vec, mass float64, radia float64) Particle {
+	k := kinematic{position: position,velocity: velocity}
+	return Particle{movement: k, mass: mass, radia: radia}
+}
+
 type kollisionDetailjs struct {
 	velocity vec.Vec
 	mass     float64
 }
 
+
 func kollisionDetailjsFromParticle(p Particle) kollisionDetailjs {
 	return kollisionDetailjs{velocity: p.movement.velocity, mass: p.mass}
 }
+
 
 func timeToCollision(pos1 vec.Vec, v1 vec.Vec, pos2 vec.Vec, v2 vec.Vec, distance float64) (bool, float64) {
 	deltaPos := vec.Subtract(pos2, pos1)
@@ -53,6 +60,6 @@ func closestPointToZero(startPosition vec.Vec, velocity vec.Vec) vec.Vec {
 	return vec.Subtract(startPosition, fromClosestPoint)
 }
 
-func dualCollision(p1 Particle, p2 Particle, timeStep float64) (Particle, Particle) {
-	return Particle{}, Particle{}
+func dualCollision(p1 Particle, p2 Particle, timeStep float64) (kinematic, kinematic) {
+	return kinematic{}, kinematic{}
 }

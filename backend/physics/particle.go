@@ -50,7 +50,7 @@ func timeToCollision(pos1 vec.Vec, v1 vec.Vec, pos2 vec.Vec, v2 vec.Vec, distanc
 	// längden från start till krock blir då känd
 	// finns det något snabbare sätt att göra detta på? Antagligen men vi måste komma någonstans
 	// Dags att implementera detta-
-	startToClosest :=   
+	//startToClosest :=   
 
 	return true, vec.DotProduct(closestPoint, closestPoint)
 }
@@ -60,6 +60,6 @@ func closestPointToZero(startPosition vec.Vec, velocity vec.Vec) vec.Vec {
 	return vec.Subtract(startPosition, fromClosestPoint)
 }
 
-func dualCollision(p1 Particle, p2 Particle, timeStep float64) (kinematic, kinematic) {
+func dualCollision(p1 Particle, p2 Particle, deltaTime float64) (kinematic, kinematic) {
 	return kinematic{}, kinematic{}
 }
